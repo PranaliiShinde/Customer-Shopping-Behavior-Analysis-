@@ -8,15 +8,16 @@ group by gender
 --Q2. Which customers used a discount but still spent more than the average purchase amount? 
 select customer_id, purchase_amount 
 from customer 
-where discount_applied = 'Yes' and purchase_amount >= (select AVG(purchase_amount) from customer)
+where discount_applied = 'Yes' and purchase_amount >= (select AVG(purchase_amount) from customer);
 
 
 -- Q3. Which are the top 5 products with the highest average review rating?
-select item_purchased, round(avg(review_rating::numeric),2) as "Average Product Rating"
-from customer
-group by item_purchased
-order by avg(review_rating) desc
-limit 5
+SELECT item_purchased,
+       ROUND(AVG(review_rating), 2) AS `Average Product Rating`
+FROM customer
+GROUP BY item_purchased
+ORDER BY AVG(review_rating) DESC
+LIMIT 5;
 
 --Q4. Compare the average Purchase Amounts between Standard and Express Shipping. 
 select shipping_type, 
